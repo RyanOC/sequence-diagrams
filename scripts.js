@@ -1,11 +1,23 @@
 
 $(function() {
-  $(".diagram").sequenceDiagram({theme: 'hand'});
+  Render();
 });
 
 $('#seqText').on('input', function (e) {
-    var value = $('#seqText').val();
-    console.log(value);
-    $('.diagram').html(value);
-    $(".diagram").sequenceDiagram({theme: 'hand'});
+    delay(function(){
+      Render();
+    }, 1000 );   
 });
+
+function Render(){
+  $('.diagram').html($('#seqText').val());
+  $(".diagram").sequenceDiagram({theme: 'hand'});
+}
+
+var delay = (function(){
+  var timer = 0;
+  return function(callback, ms){
+    clearTimeout (timer);
+    timer = setTimeout(callback, ms);
+  };
+})();
